@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LET'S UNDERSTAND THE SONG! - English Class VII</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-blue': '#E0F2FE',
+                        'pastel-blue-dark': '#0284C7',
+                        'pastel-purple': '#F3E8FF',
+                        'pastel-purple-dark': '#9333EA',
+                        'pastel-yellow': '#FEF08A',
+                        'pastel-yellow-dark': '#CA8A04',
+                        'pastel-pink': '#FCE7F3',
+                        'pastel-green': '#DCFCE7',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        bounceSlow: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                            '50%': { opacity: 0.85, transform: 'scale(1.03)' }
+                        }
+                    },
+                    animation: {
+                        float: 'float 3s ease-in-out infinite',
+                        bounceSlow: 'bounceSlow 2s ease-in-out infinite',
+                        pulseGlow: 'pulseGlow 2s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f3e8ff 50%, #fef08a 100%);
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c084fc;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .active-tab {
+            background-color: #9333EA !important;
+            color: white !important;
+            box-shadow: 0 4px 14px 0 rgba(147, 51, 234, 0.39);
+        }
+
+        /* Custom Transition */
+        .page-section {
+            transition: all 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-slate-800 flex flex-col min-h-screen">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 glass-card shadow-sm border-b border-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('opening')">
+                    <div class="bg-gradient-to-tr from-purple-600 to-blue-500 text-white p-2.5 rounded-2xl shadow-md animate-bounceSlow">
+                        <i class="fa-solid fa-music text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-extrabold text-lg sm:text-xl text-purple-900 tracking-tight leading-none">BEAT & MEANING</h1>
+                        <p class="text-xs text-purple-600 font-medium">English Learning Grade VII / Phase D</p>
+                    </div>
+                </div>
+
+                <!-- Learning Progress Bar -->
+                <div class="hidden md:flex flex-col w-48 lg:w-64">
+                    <div class="flex justify-between text-xs font-semibold text-purple-800 mb-1">
+                        <span>Learning Progress</span>
+                        <span id="progress-percentage">0%</span>
+                    </div>
+                    <div class="w-full bg-purple-200 h-2.5 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full transition-all duration-500 w-0"></div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-purple-700 hover:text-purple-900 rounded-lg focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-purple-100 px-4 pt-2 pb-4 space-y-1">
+            <div class="py-2 text-xs font-bold text-purple-500 uppercase tracking-wider">Navigation Menu</div>
+            <button onclick="navigateTo('objectives')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-bullseye text-purple-600 w-6"></i> Learning Objectives</button>
+            <button onclick="navigateTo('learn')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-book-open text-blue-500 w-6"></i> Let's Learn</button>
+            <button onclick="navigateTo('vocab')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-spell-check text-emerald-500 w-6"></i> Vocabulary Corner</button>
+            <button onclick="navigateTo('listen')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-headphones text-pink-500 w-6"></i> Listen to the Song</button>
+            <button onclick="navigateTo('practice')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-pen-ruler text-amber-500 w-6"></i> Let's Practice</button>
+            <button onclick="navigateTo('quiz')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-graduation-cap text-indigo-500 w-6"></i> Quiz Time</button>
+            <button onclick="navigateTo('reflection')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-brain text-teal-500 w-6"></i> Reflection</button>
+            <button onclick="navigateTo('about')" class="mobile-nav-btn block w-full text-left px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-purple-100"><i class="fa-solid fa-circle-info text-slate-500 w-6"></i> About</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER WITH SIDEBAR & CONTENT -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow flex flex-col md:flex-row gap-6">
+
+        <!-- DESKTOP SIDEBAR NAVIGATION -->
+        <aside id="desktop-sidebar" class="hidden md:flex flex-col w-64 glass-card p-4 rounded-3xl shadow-md h-fit sticky top-24">
+            <p class="text-xs font-bold text-purple-600 tracking-wider uppercase mb-3 px-3">Main Menu</p>
+            <nav class="space-y-1.5">
+                <button id="nav-objectives" onclick="navigateTo('objectives')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-bullseye text-purple-600 text-lg w-5"></i> Objectives
+                </button>
+                <button id="nav-learn" onclick="navigateTo('learn')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-book-open text-blue-500 text-lg w-5"></i> Let's Learn
+                </button>
+                <button id="nav-vocab" onclick="navigateTo('vocab')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-spell-check text-emerald-500 text-lg w-5"></i> Vocabulary Corner
+                </button>
+                <button id="nav-listen" onclick="navigateTo('listen')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-headphones text-pink-500 text-lg w-5"></i> Listen to Song
+                </button>
+                <button id="nav-practice" onclick="navigateTo('practice')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-pen-ruler text-amber-500 text-lg w-5"></i> Let's Practice
+                </button>
+                <button id="nav-quiz" onclick="navigateTo('quiz')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-graduation-cap text-indigo-500 text-lg w-5"></i> Quiz Time
+                </button>
+                <button id="nav-reflection" onclick="navigateTo('reflection')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-brain text-teal-500 text-lg w-5"></i> Reflection
+                </button>
+                <button id="nav-about" onclick="navigateTo('about')" class="sidebar-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-purple-100/80 transition-all">
+                    <i class="fa-solid fa-circle-info text-slate-500 text-lg w-5"></i> About
+                </button>
+            </nav>
+            
+            <div class="mt-6 pt-4 border-t border-slate-200/60 px-3">
+                <div class="bg-gradient-to-br from-purple-500 to-blue-600 p-3.5 rounded-2xl text-white text-center shadow-sm">
+                    <i class="fa-solid fa-compact-disc text-2xl animate-spin text-amber-300 mb-1" style="animation-duration: 8s;"></i>
+                    <p class="text-xs font-semibold">Fun Fact</p>
+                    <p class="text-[11px] opacity-90 leading-tight mt-1">Songs help you remember new English words 2x faster!</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENT AREA CONTAINER -->
+        <main class="flex-grow">
+
+            <!-- 1. OPENING SECTION -->
+            <section id="sec-opening" class="page-section glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-white/80 relative overflow-hidden text-center flex flex-col items-center justify-center min-h-[500px]">
+                <!-- Decorative Elements -->
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-purple-300/40 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-300/40 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="inline-flex items-center gap-2 bg-yellow-200 text-yellow-800 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-4 shadow-sm animate-pulseGlow">
+                    <i class="fa-solid fa-star"></i> Interactive English Learning Media
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl font-black text-slate-800 tracking-tight mb-2">
+                    LET'S UNDERSTAND <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-600 to-pink-500">THE SONG!</span>
+                </h1>
+                
+                <p class="text-slate-600 text-base sm:text-lg max-w-xl font-medium mb-6">
+                    English Subject Grade VII / Phase D <br>
+                    <span class="text-xs sm:text-sm text-slate-500 font-normal">Explore vocabulary, find messages, and sing along while learning English in a fun way!</span>
+                </p>
+
+                <!-- Student & Music Illustration Display -->
+                <div class="relative my-4 flex items-center justify-center gap-6">
+                    <div class="w-20 h-20 sm:w-28 sm:h-28 bg-purple-200/80 rounded-3xl flex items-center justify-center shadow-lg animate-float text-purple-600 text-4xl sm:text-5xl">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+                    <div class="w-24 h-24 sm:w-32 sm:h-32 bg-blue-200/80 rounded-full flex items-center justify-center shadow-xl animate-bounceSlow text-blue-600 text-5xl sm:text-6xl border-4 border-white">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="w-20 h-20 sm:w-28 sm:h-28 bg-pink-200/80 rounded-3xl flex items-center justify-center shadow-lg animate-float text-pink-600 text-4xl sm:text-5xl" style="animation-delay: 1.5s;">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                </div>
+
+                <button onclick="startLearning()" class="mt-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg px-10 py-4 rounded-2xl shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition-all flex items-center gap-3 group">
+                    <span>START LEARNING</span>
+                    <i class="fa-solid fa-circle-play text-amber-300 text-xl group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </section>
+
+            <!-- 2. LEARNING OBJECTIVES -->
+            <section id="sec-objectives" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-purple-100 text-purple-600 p-3 rounded-2xl">
+                        <i class="fa-solid fa-bullseye text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Learning Objectives</h2>
+                        <p class="text-sm text-slate-500">Tujuan Pembelajaran - Apa yang akan kamu capai hari ini?</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Objective Card 1 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200/80 p-5 rounded-2xl hover:shadow-md transition-all flex items-start gap-4">
+                        <div class="bg-blue-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">1</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base mb-1">Identify Vocabularies</h3>
+                            <p class="text-sm text-slate-600">Peserta didik mampu mengidentifikasi kosakata (*vocabulary*) penting yang terdapat dalam lagu berbahasa Inggris.</p>
+                        </div>
+                    </div>
+
+                    <!-- Objective Card 2 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-200/80 p-5 rounded-2xl hover:shadow-md transition-all flex items-start gap-4">
+                        <div class="bg-purple-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">2</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base mb-1">Understand Words & Sentences</h3>
+                            <p class="text-sm text-slate-600">Peserta didik mampu memahami makna kata dan kalimat sederhana yang menyusun lirik lagu.</p>
+                        </div>
+                    </div>
+
+                    <!-- Objective Card 3 -->
+                    <div class="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200/80 p-5 rounded-2xl hover:shadow-md transition-all flex items-start gap-4">
+                        <div class="bg-amber-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">3</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base mb-1">Find Theme & Message</h3>
+                            <p class="text-sm text-slate-600">Peserta didik mampu mengidentifikasi tema utama serta pesan moral (*moral message*) dalam lagu.</p>
+                        </div>
+                    </div>
+
+                    <!-- Objective Card 4 -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/80 p-5 rounded-2xl hover:shadow-md transition-all flex items-start gap-4">
+                        <div class="bg-emerald-500 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shrink-0 shadow-sm">4</div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base mb-1">Summarize Song Meaning</h3>
+                            <p class="text-sm text-slate-600">Peserta didik mampu menyimpulkan makna keseluruhan lagu menggunakan bahasa Inggris sederhana.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="navigateTo('learn')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm">
+                        <span>Next: Let's Learn</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 3. LET'S LEARN (MATERIALS) -->
+            <section id="sec-learn" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-blue-100 text-blue-600 p-3 rounded-2xl">
+                        <i class="fa-solid fa-book-open text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Let's Learn: Songs Materials</h2>
+                        <p class="text-sm text-slate-500">Materi Pembelajaran - Mari Memahami Lagu!</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Tabs for Learning Content -->
+                <div class="space-y-6">
+                    <!-- Topic 1: What is a song & Purpose -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-2 text-purple-700 font-bold text-lg mb-2">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <h3>1. Definition & Social Function (Pengertian & Tujuan)</h3>
+                        </div>
+                        <p class="text-slate-700 text-sm leading-relaxed mb-3">
+                            A <strong>song</strong> is a short piece of music with words that you sing.
+                            <br><span class="text-slate-500 italic">(Lagu adalah karya musik pendek yang diiringi dengan lirik/kata-kata untuk dinyanyikan.)</span>
+                        </p>
+                        <div class="bg-purple-50 p-3.5 rounded-xl text-sm border-l-4 border-purple-500">
+                            <p class="font-semibold text-purple-900 mb-1">Social Purpose of Songs (Tujuan Lagu):</p>
+                            <ul class="list-disc list-inside text-slate-700 space-y-1 text-xs sm:text-sm">
+                                <li>To express feelings and emotions (Mengekspresikan perasaan & emosi).</li>
+                                <li>To entertain the listener (Mengerhibur pendengar).</li>
+                                <li>To teach moral values / positive messages (Mengajarkan nilai moral / pesan positif).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Topic 2: Elements of a Song -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-2 text-blue-700 font-bold text-lg mb-3">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <h3>2. Generic Structure / Elements of a Song (Bagian-Bagian Lagu)</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+                            <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                                <span class="font-bold text-blue-800 block text-sm">Intro & Verse</span>
+                                <p class="text-slate-600 mt-1">Pembuka lagu & bait-bait awal yang menceritakan latar belakang kisah lagu.</p>
+                            </div>
+                            <div class="bg-amber-50 p-3 rounded-xl border border-amber-100">
+                                <span class="font-bold text-amber-800 block text-sm">Chorus / Refrain</span>
+                                <p class="text-slate-600 mt-1">Bagian inti lagu yang diulang-ulang. Memuat pesan utama dari lagu.</p>
+                            </div>
+                            <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+                                <span class="font-bold text-emerald-800 block text-sm">Outro</span>
+                                <p class="text-slate-600 mt-1">Bagian penutup lagu yang mengakhiri seluruh musik dan cerita.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Topic 3: Steps to Understand Song -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-2 text-emerald-700 font-bold text-lg mb-3">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <h3>3. How to Understand the Meaning of a Song (Cara Memahami Lagu)</h3>
+                        </div>
+                        <ol class="space-y-2 text-xs sm:text-sm text-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mt-0.5">1</span>
+                                <span><strong>Read the lyrics carefully:</strong> Baca lirik lagu dengan saksama kata demi kata.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mt-0.5">2</span>
+                                <span><strong>Find keywords & vocabulary:</strong> Temukan kata-kata kunci dan cari artinya jika ada kata sulit.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mt-0.5">3</span>
+                                <span><strong>Identify the Theme:</strong> Cari tahu topik utama (contoh: friendship, love, hope, hard work).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full mt-0.5">4</span>
+                                <span><strong>Find the Message:</strong> Tanyakan pada diri sendiri "Pesan kebaikan apa yang ingin disampaikan lagu ini?".</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="navigateTo('objectives')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2 rounded-xl transition-all text-sm">Previous</button>
+                    <button onclick="navigateTo('vocab')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <span>Next: Vocabulary</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 4. VOCABULARY CORNER -->
+            <section id="sec-vocab" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-emerald-100 text-emerald-600 p-3 rounded-2xl">
+                            <i class="fa-solid fa-spell-check text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-800">Vocabulary Corner</h2>
+                            <p class="text-sm text-slate-500">Klik kartu kata untuk melihat contoh kalimat & pengucapan!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vocab Cards Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="vocab-grid">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Selected Vocab Modal/Detail Display -->
+                <div id="vocab-detail" class="mt-6 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 p-5 rounded-2xl hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-600">Vocabulary Detail</span>
+                            <h3 id="detail-word" class="text-2xl font-black text-slate-800">Word</h3>
+                            <p id="detail-meaning" class="text-base text-purple-700 font-medium">Arti Kata</p>
+                        </div>
+                        <button onclick="playVocabSound()" class="bg-purple-600 text-white p-3 rounded-xl shadow-md hover:bg-purple-700 transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high text-lg"></i>
+                            <span class="text-xs font-bold hidden sm:inline">Listen</span>
+                        </button>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-purple-200/60">
+                        <p class="text-xs font-semibold text-slate-500">Example Sentence:</p>
+                        <p id="detail-example" class="text-sm font-medium text-slate-700 italic mt-0.5">"Example sentence goes here."</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="navigateTo('learn')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2 rounded-xl transition-all text-sm">Previous</button>
+                    <button onclick="navigateTo('listen')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <span>Next: Listen Song</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 5. LISTEN TO THE SONG -->
+            <section id="sec-listen" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-pink-100 text-pink-600 p-3 rounded-2xl">
+                        <i class="fa-solid fa-headphones text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Listen to the Song</h2>
+                        <p class="text-sm text-slate-500">Dengarkan lagu, cermati liriknya, lalu jawab pertanyaan!</p>
+                    </div>
+                </div>
+
+                <!-- Song Player Card -->
+                <div class="bg-gradient-to-r from-slate-900 to-purple-950 text-white rounded-2xl p-5 sm:p-6 shadow-xl mb-6 flex flex-col sm:flex-row items-center gap-6">
+                    <div class="w-24 h-24 sm:w-32 sm:h-32 bg-purple-600 rounded-2xl flex items-center justify-center shrink-0 shadow-lg relative group">
+                        <i class="fa-solid fa-music text-4xl text-amber-300"></i>
+                    </div>
+                    <div class="flex-grow text-center sm:text-left w-full">
+                        <span class="bg-purple-500/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">Educational Song</span>
+                        <h3 class="text-2xl font-bold mt-2 text-amber-300">"Count On Me" (Friendship Song)</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm">Theme: True Friendship & Helping Each Other</p>
+                        
+                        <!-- Web Audio / Synthesizer Audio Player Simulation -->
+                        <div class="mt-4 bg-white/10 p-3 rounded-xl flex items-center gap-3 backdrop-blur-sm">
+                            <button id="song-play-btn" onclick="toggleSongPlay()" class="bg-amber-400 hover:bg-amber-500 text-slate-900 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all shrink-0">
+                                <i class="fa-solid fa-play ml-0.5"></i>
+                            </button>
+                            <div class="flex-grow">
+                                <div class="flex justify-between text-xs text-slate-300 mb-1">
+                                    <span id="audio-time">0:00</span>
+                                    <span>Melody Synth Audio</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden cursor-pointer" onclick="seekAudio(event)">
+                                    <div id="audio-progress" class="bg-amber-400 h-2 w-0 transition-all"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Song Lyrics & Quick Check Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Lyrics Box -->
+                    <div class="bg-amber-50/80 border border-amber-200 p-5 rounded-2xl">
+                        <h4 class="font-bold text-amber-900 text-base mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-align-left text-amber-600"></i>
+                            Song Lyrics (Lirik Lagu)
+                        </h4>
+                        <div class="text-xs sm:text-sm text-slate-800 space-y-3 font-medium leading-relaxed max-h-72 overflow-y-auto pr-2">
+                            <p class="italic text-slate-500">[Verse 1]</p>
+                            <p>If you ever find yourself stuck in the middle of the sea,<br>I'll sail the world to find you.<br>If you ever find yourself lost in the dark and you can't see,<br>I'll be the light to guide you.</p>
+
+                            <p class="italic text-slate-500">[Chorus]</p>
+                            <p class="bg-amber-200/50 p-2 rounded-lg border-l-2 border-amber-500">
+                            You can count on me like one, two, three, I'll be there.<br>
+                            And I know when I need it,<br>
+                            I can count on you like four, three, two, you'll be there.<br>
+                            'Cause that's what friends are supposed to do!
+                            </p>
+
+                            <p class="italic text-slate-500">[Verse 2]</p>
+                            <p>If you're tossin' and you're turnin' and you can't fall asleep,<br>I'll sing a song beside you.<br>And if you ever forget how much you really mean to me,<br>Every day I will remind you.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Comprehension Questions -->
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-question text-purple-600"></i>
+                                Quick Listening Check
+                            </h4>
+                            <p class="text-xs text-slate-600 mb-4">Apa arti ungkapan <strong>"You can count on me"</strong> dalam lagu di atas?</p>
+                            
+                            <div class="space-y-2" id="quick-check-options">
+                                <button onclick="checkQuickAnswer(this, false)" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-purple-50 transition-all text-xs sm:text-sm">
+                                    A. Kamu bisa menghitung angka bersama saya.
+                                </button>
+                                <button onclick="checkQuickAnswer(this, true)" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-purple-50 transition-all text-xs sm:text-sm">
+                                    B. Kamu bisa mengandalkan/mempercayai saya.
+                                </button>
+                                <button onclick="checkQuickAnswer(this, false)" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-purple-50 transition-all text-xs sm:text-sm">
+                                    C. Kamu bisa bernyanyi bersama saya.
+                                </button>
+                            </div>
+                            <div id="quick-feedback" class="mt-3 hidden p-2.5 rounded-xl text-xs font-semibold"></div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <p class="text-xs text-slate-500"><i class="fa-solid fa-lightbulb text-amber-500"></i> <strong>Pesan Lagu:</strong> Sahabat sejati selalu siap membantu saat temannya sedang kesulitan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="navigateTo('vocab')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2 rounded-xl transition-all text-sm">Previous</button>
+                    <button onclick="navigateTo('practice')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <span>Next: Practice</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 6. LET'S PRACTICE -->
+            <section id="sec-practice" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-amber-100 text-amber-600 p-3 rounded-2xl">
+                        <i class="fa-solid fa-pen-ruler text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Let's Practice!</h2>
+                        <p class="text-sm text-slate-500">Uji pemahaman awalmu melalui berbagai jenis latihan interaktif!</p>
+                    </div>
+                </div>
+
+                <!-- Practice Tabs -->
+                <div class="space-y-6">
+                    <!-- Task 1: Word Matching -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-purple-900 text-base mb-3"><i class="fa-solid fa-puzzle-piece text-purple-600"></i> Task 1: Vocabulary Matching</h3>
+                        <p class="text-xs text-slate-600 mb-4">Jodohkan kata bahasa Inggris di sebelah kiri dengan arti bahasa Indonesia yang sesuai di sebelah kanan!</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                            <div class="space-y-2">
+                                <div class="p-3 bg-purple-50 rounded-xl font-semibold text-purple-900 flex justify-between items-center">
+                                    <span>1. Guide</span>
+                                    <select id="match-1" class="bg-white border border-purple-300 rounded-lg p-1 text-slate-700 font-normal focus:outline-none">
+                                        <option value="">-- Pilih Arti --</option>
+                                        <option value="saling">Saling</option>
+                                        <option value="menuntun">Menuntun / Membimbing</option>
+                                        <option value="mengingatkan">Mengingatkan</option>
+                                    </select>
+                                </div>
+                                <div class="p-3 bg-purple-50 rounded-xl font-semibold text-purple-900 flex justify-between items-center">
+                                    <span>2. Remind</span>
+                                    <select id="match-2" class="bg-white border border-purple-300 rounded-lg p-1 text-slate-700 font-normal focus:outline-none">
+                                        <option value="">-- Pilih Arti --</option>
+                                        <option value="saling">Saling</option>
+                                        <option value="menuntun">Menuntun / Membimbing</option>
+                                        <option value="mengingatkan">Mengingatkan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="p-3 bg-purple-50 rounded-xl font-semibold text-purple-900 flex justify-between items-center">
+                                    <span>3. Count on</span>
+                                    <select id="match-3" class="bg-white border border-purple-300 rounded-lg p-1 text-slate-700 font-normal focus:outline-none">
+                                        <option value="">-- Pilih Arti --</option>
+                                        <option value="mengandalkan">Mengandalkan</option>
+                                        <option value="menuntun">Menuntun</option>
+                                        <option value="mengingatkan">Mengingatkan</option>
+                                    </select>
+                                </div>
+                                <button onclick="checkMatchingTask()" class="w-full h-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-circle-check"></i> Check Answers
+                                </button>
+                            </div>
+                        </div>
+                        <div id="matching-feedback" class="mt-3 hidden p-3 rounded-xl text-xs font-semibold"></div>
+                    </div>
+
+                    <!-- Task 2: Fill in the Blank -->
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-blue-900 text-base mb-3"><i class="fa-solid fa-file-pen text-blue-600"></i> Task 2: Complete the Lyrics</h3>
+                        <p class="text-xs text-slate-600 mb-3">Lengkapi lirik lagu di bawah ini dengan kata yang tepat: <strong>[ light, dark, song ]</strong></p>
+                        
+                        <div class="bg-slate-50 p-4 rounded-xl text-xs sm:text-sm leading-relaxed text-slate-700 space-y-2 border border-slate-200">
+                            <p>
+                                "If you ever find yourself lost in the 
+                                <input type="text" id="blank-1" placeholder="..." class="border-b-2 border-blue-500 bg-white px-2 py-0.5 rounded text-blue-700 font-bold focus:outline-none w-24 text-center"> 
+                                and you can't see, I'll be the 
+                                <input type="text" id="blank-2" placeholder="..." class="border-b-2 border-blue-500 bg-white px-2 py-0.5 rounded text-blue-700 font-bold focus:outline-none w-24 text-center"> 
+                                to guide you."
+                            </p>
+                        </div>
+                        <button onclick="checkFillBlanks()" class="mt-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded-xl transition-all">
+                            Check Lyric Completion
+                        </button>
+                        <div id="fill-feedback" class="mt-3 hidden p-3 rounded-xl text-xs font-semibold"></div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="navigateTo('listen')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2 rounded-xl transition-all text-sm">Previous</button>
+                    <button onclick="navigateTo('quiz')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <span>Next: Quiz Time</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 7. QUIZ TIME -->
+            <section id="sec-quiz" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-indigo-100 text-indigo-600 p-3 rounded-2xl">
+                            <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-800">Quiz Time</h2>
+                            <p class="text-sm text-slate-500">Evaluasi Pemahaman (10 Soal Pilihan Ganda)</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-xl text-indigo-800 text-xs font-bold">
+                        Question <span id="quiz-current-num">1</span> of 10
+                    </div>
+                </div>
+
+                <!-- Quiz Container View -->
+                <div id="quiz-container" class="space-y-6">
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 id="quiz-question" class="text-base sm:text-lg font-bold text-slate-800 mb-4">Question text goes here...</h3>
+                        <div id="quiz-options" class="space-y-3">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button id="quiz-prev-btn" onclick="prevQuestion()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-4 py-2 rounded-xl text-sm transition-all disabled:opacity-50">
+                            <i class="fa-solid fa-chevron-left mr-1"></i> Prev
+                        </button>
+                        <button id="quiz-next-btn" onclick="nextQuestion()" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-xl text-sm transition-all shadow-sm">
+                            Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Result Score Card (Hidden initially) -->
+                <div id="quiz-result" class="hidden text-center py-6">
+                    <div class="w-24 h-24 bg-gradient-to-tr from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl animate-bounceSlow mb-4">
+                        <i class="fa-solid fa-trophy text-amber-300"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-800 mb-1">Quiz Completed!</h3>
+                    <p class="text-sm text-slate-500 mb-4">Berikut adalah hasil evaluasi pemahaman lagu kamu:</p>
+
+                    <div class="max-w-md mx-auto bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-6">
+                        <div class="text-5xl font-black text-purple-600 mb-2"><span id="quiz-score-num">0</span>%</div>
+                        <div id="quiz-predicate" class="inline-block bg-purple-100 text-purple-800 font-bold text-sm px-4 py-1 rounded-full mb-4">Predicate</div>
+                        
+                        <div class="grid grid-cols-2 gap-3 text-sm pt-4 border-t border-slate-100">
+                            <div class="bg-emerald-50 p-2.5 rounded-xl border border-emerald-200">
+                                <span class="text-xs text-slate-500 block">Benar</span>
+                                <span id="quiz-correct-cnt" class="font-bold text-emerald-600 text-lg">0</span>
+                            </div>
+                            <div class="bg-rose-50 p-2.5 rounded-xl border border-rose-200">
+                                <span class="text-xs text-slate-500 block">Salah</span>
+                                <span id="quiz-wrong-cnt" class="font-bold text-rose-600 text-lg">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button onclick="resetQuiz()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-rotate-right"></i> Try Again
+                        </button>
+                        <button onclick="navigateTo('reflection')" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 text-sm">
+                            Next: Reflection <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. REFLECTION -->
+            <section id="sec-reflection" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-teal-100 text-teal-600 p-3 rounded-2xl">
+                        <i class="fa-solid fa-brain text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Student Reflection</h2>
+                        <p class="text-sm text-slate-500">Refleksi Pembelajaran - Apa yang kamu rasakan hari ini?</p>
+                    </div>
+                </div>
+
+                <form id="reflection-form" onsubmit="submitReflection(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">1. What did you learn today? (Apa yang telah kamu pelajari hari ini?)</label>
+                        <textarea id="ref-q1" required rows="2" placeholder="Saya belajar tentang..." class="w-full p-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">2. What is your favorite new vocabulary? (Kosakata baru apa yang paling kamu sukai?)</label>
+                        <input id="ref-q2" type="text" required placeholder="Contoh: Count on, Guide, Remind..." class="w-full p-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">3. What moral message can you get from the song? (Pesan moral apa yang kamu dapatkan dari lagu?)</label>
+                        <textarea id="ref-q3" required rows="2" placeholder="Pesan moral lagu ini adalah..." class="w-full p-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Reflection
+                    </button>
+                </form>
+
+                <div id="reflection-saved" class="hidden mt-6 bg-emerald-50 border border-emerald-200 p-5 rounded-2xl text-emerald-800">
+                    <h4 class="font-bold flex items-center gap-2 text-base mb-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Reflection Submitted Successfully!</h4>
+                    <p class="text-xs text-emerald-700 mb-3">Terima kasih telah mengisi refleksi pembelajaran hari ini. Kerja bagus!</p>
+                    <div id="reflection-summary" class="bg-white p-3 rounded-xl text-xs space-y-1 text-slate-700 border border-emerald-100"></div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button onclick="navigateTo('quiz')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2 rounded-xl transition-all text-sm">Previous</button>
+                    <button onclick="navigateTo('about')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <span>About Media</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 9. ABOUT -->
+            <section id="sec-about" class="page-section hidden glass-card rounded-3xl p-6 sm:p-8 shadow-lg">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200/60">
+                    <div class="bg-slate-200 text-slate-700 p-3 rounded-2xl">
+                        <i class="fa-solid fa-circle-info text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">About Learning Media</h2>
+                        <p class="text-sm text-slate-500">Informasi Media Pembelajaran Interaktif (PMI)</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-slate-700">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                        <h3 class="font-bold text-purple-900 text-base mb-2">BEAT & MEANING: Understanding Song Lyrics</h3>
+                        <p><strong>Mata Pelajaran:</strong> Bahasa Inggris</p>
+                        <p><strong>Kelas / Sasaran:</strong> VII (Tujuh) SMP / Fase D</p>
+                        <p><strong>Materi Pokok:</strong> Understanding the Meaning of a Song</p>
+                        <p><strong>Pendekatan:</strong> Deep Learning, Interactive Learning, Student-Centered Learning</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-purple-900 text-base mb-2">Developer Profile</h3>
+                        <p><strong>Pengembang / Guru:</strong> Tim Pengembang Media Pembelajaran Bahasa Inggris</p>
+                        <p><strong>Instansi:</strong> SMP Kelas VII / Fase D Interactive Media</p>
+                        <p><strong>Teknologi Web:</strong> HTML5, CSS3 (Tailwind CSS Framework), JavaScript ES6 (Web Audio API)</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-start">
+                    <button onclick="navigateTo('opening')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm text-sm">
+                        <i class="fa-solid fa-house"></i> Back to Home
+                    </button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto py-4 text-center text-xs text-slate-500 glass-card border-t border-white/50">
+        <p>© 2026 Interactive English Learning Media Grade VII - Understanding the Meaning of a Song.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTIVITY -->
+    <script>
+        // --- 1. VOCABULARY DATA ---
+        const vocabularies = [
+            { word: "Happy", meaning: "Bahagia", example: "Music makes me feel happy every day." },
+            { word: "Smile", meaning: "Senyum", example: "A warm smile can make a friend feel better." },
+            { word: "Dream", meaning: "Mimpi / Cita-cita", example: "Never stop chasing your big dream." },
+            { word: "Love", meaning: "Cinta / Kasih Sayang", example: "The song expresses love for best friends." },
+            { word: "Friend", meaning: "Teman / Sahabat", example: "A true friend is always there for you." },
+            { word: "Hope", meaning: "Harapan", example: "Keep your hope high when facing difficulties." },
+            { word: "Beautiful", meaning: "Indah / Cantik", example: "The lyrics have a beautiful meaning." },
+            { word: "Count on", meaning: "Mengandalkan", example: "You can count on me whenever you need help." },
+            { word: "Guide", meaning: "Menuntun / Membimbing", example: "The light will guide you home in the dark." },
+            { word: "Remind", meaning: "Mengingatkan", example: "I will remind you how important you are." }
+        ];
+
+        // --- 2. QUIZ DATA (10 Questions) ---
+        const quizQuestions = [
+            {
+                q: "What is the primary social function of a song?",
+                options: ["To present factual news to people", "To express feelings, emotions, and entertain listeners", "To give instructions on how to make something", "To describe a historical location"],
+                answer: 1,
+                explanation: "Lagu bertujuan untuk mengekspresikan emosi, perasaan, serta menghibur pendengarnya."
+            },
+            {
+                q: "What does the word 'Chorus' mean in a song structure?",
+                options: ["The intro part played by drums only", "The main part/core message of a song that is repeated", "The ending phrase of a song", "The writer's biography"],
+                answer: 1,
+                explanation: "Chorus adalah bagian inti lagu yang memuat pesan utama dan biasanya diulang beberapa kali."
+            },
+            {
+                q: "What is the Indonesian meaning of the phrase 'Count on me'?",
+                options: ["Hitung angka bersama saya", "Andalkan / percayai saya", "Nyanyikan lagu untuk saya", "Tuliskan nama saya"],
+                answer: 1,
+                explanation: "'Count on me' berarti 'Mengandalkan saya' atau 'Mempercayai saya'."
+            },
+            {
+                q: "In the lyric 'I'll be the light to guide you', what does 'light' symbolize?",
+                options: ["Help / Hope in difficult times", "Electric lamp", "Firework in the sky", "Bright sunlight"],
+                answer: 0,
+                explanation: "'Light' (cahaya) melambangkan bantuan atau harapan di masa-masa sulit."
+            },
+            {
+                q: "If a song tells a story about helping a friend in trouble, what is its main theme?",
+                options: ["Sports and Health", "True Friendship and Kindness", "Shopping in a store", "Cooking recipes"],
+                answer: 1,
+                explanation: "Lagu yang menceritakan tentang membantu teman bertema persahabatan sejati."
+            },
+            {
+                q: "Which word has a similar meaning to 'Hope'?",
+                options: ["Expectation / Wish", "Sadness", "Anger", "Fear"],
+                answer: 0,
+                explanation: "'Hope' berarti harapan, memiliki makna serupa dengan 'Expectation' atau 'Wish'."
+            },
+            {
+                q: "What should you do FIRST to understand the overall meaning of a song?",
+                options: ["Dance with the music", "Read and understand the lyrics and vocabulary", "Memorize the drum beat", "Buy the album CD"],
+                answer: 1,
+                explanation: "Langkah pertama memahami lagu adalah membaca lirik dan mengidentifikasi kosakatanya."
+            },
+            {
+                q: "The lyric 'I'll sing a song beside you' shows that the singer wants to...",
+                options: ["Comfort their friend", "Make loud noise", "Compete with their friend", "Leave the room"],
+                answer: 0,
+                explanation: "Menyanyikan lagu di samping teman menunjukkan keinginan untuk menenangkan/menghibur (comfort)."
+            },
+            {
+                q: "What element usually opens a song before the lyrics begin?",
+                options: ["Outro", "Intro", "Chorus", "Bridge"],
+                answer: 1,
+                explanation: "Bagian musik pembuka lagu sebelum lirik dimulai disebut 'Intro'."
+            },
+            {
+                q: "What moral message can we learn from the song 'Count On Me'?",
+                options: ["Friends should only meet during parties", "We should support and help our friends whenever needed", "We should count numbers every day", "Friends should not talk to each other"],
+                answer: 1,
+                explanation: "Pesan moralnya adalah saling mendukung dan membantu teman dalam kondisi apa pun."
+            }
+        ];
+
+        // --- APP STATE VARIABLES ---
+        let currentSection = 'opening';
+        let currentQuizIndex = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let currentVocabWord = vocabularies[0].word;
+        let isAudioPlaying = false;
+        let audioInterval = null;
+        let audioProgressVal = 0;
+
+        // Progress Tracking Set
+        const visitedSections = new Set(['opening']);
+
+        // --- NAVIGATION LOGIC ---
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Show selected section
+            const targetSec = document.getElementById('sec-' + sectionId);
+            if (targetSec) {
+                targetSec.classList.remove('hidden');
+            }
+
+            currentSection = sectionId;
+            visitedSections.add(sectionId);
+
+            // Update Desktop Sidebar Active State
+            document.querySelectorAll('.sidebar-btn').forEach(btn => {
+                btn.classList.remove('active-tab');
+            });
+            const activeNavBtn = document.getElementById('nav-' + sectionId);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('active-tab');
+            }
+
+            // Close Mobile Menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            // Update Progress Bar
+            updateProgressBar();
+
+            // Scroll Smooth to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startLearning() {
+            navigateTo('objectives');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function updateProgressBar() {
+            const totalSections = 8; // Excluding opening & about
+            const percentage = Math.min(Math.round((visitedSections.size / totalSections) * 100), 100);
+            
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-percentage').innerText = percentage + '%';
+        }
+
+        // --- VOCABULARY CORNER LOGIC ---
+        function renderVocabularyGrid() {
+            const container = document.getElementById('vocab-grid');
+            container.innerHTML = '';
+
+            vocabularies.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-all cursor-pointer hover:border-purple-300 flex flex-col justify-between group";
+                card.onclick = () => selectVocab(item);
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-bold text-slate-800 group-hover:text-purple-600 transition-colors text-base">${item.word}</span>
+                            <i class="fa-solid fa-volume-high text-slate-300 group-hover:text-purple-500 text-xs"></i>
+                        </div>
+                        <p class="text-xs text-purple-700 font-medium">${item.meaning}</p>
+                    </div>
+                    <span class="text-[10px] text-slate-400 mt-3 block font-medium">Click for example →</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectVocab(item) {
+            currentVocabWord = item.word;
+            document.getElementById('detail-word').innerText = item.word;
+            document.getElementById('detail-meaning').innerText = item.meaning;
+            document.getElementById('detail-example').innerText = `"${item.example}"`;
+            
+            const detailBox = document.getElementById('vocab-detail');
+            detailBox.classList.remove('hidden');
+            detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            playVocabSound();
+        }
+
+        // Web Audio Synthesizer for Vocab Pronunciation Simulation
+        function playVocabSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, ctx.currentTime); // Note A4
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // Ramp to A5
+                
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch(e) {
+                console.log("Audio Context sound played.");
+            }
+        }
+
+        // --- LISTEN TO SONG AUDIO SIMULATION ---
+        function toggleSongPlay() {
+            const btn = document.getElementById('song-play-btn');
+            if (!isAudioPlaying) {
+                isAudioPlaying = true;
+                btn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                
+                // Simulate audio progress
+                audioInterval = setInterval(() => {
+                    audioProgressVal += 2;
+                    if (audioProgressVal > 100) {
+                        audioProgressVal = 0;
+                        toggleSongPlay();
+                        return;
+                    }
+                    document.getElementById('audio-progress').style.width = audioProgressVal + '%';
+                    
+                    // Calc simulated time
+                    const totalSec = Math.floor((audioProgressVal / 100) * 120);
+                    const min = Math.floor(totalSec / 60);
+                    const sec = totalSec % 60;
+                    document.getElementById('audio-time').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                }, 300);
+
+                playMelodyLoop();
+            } else {
+                isAudioPlaying = false;
+                btn.innerHTML = `<i class="fa-solid fa-play ml-0.5"></i>`;
+                clearInterval(audioInterval);
+            }
+        }
+
+        function playMelodyLoop() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const notes = [261.63, 329.63, 392.00, 523.25]; // C, E, G, C
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime + idx * 0.2);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.2 + 0.3);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.2);
+                    osc.stop(ctx.currentTime + idx * 0.2 + 0.3);
+                });
+            } catch(e){}
+        }
+
+        function seekAudio(e) {
+            const bar = e.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const clickPos = (e.clientX - rect.left) / rect.width;
+            audioProgressVal = Math.floor(clickPos * 100);
+            document.getElementById('audio-progress').style.width = audioProgressVal + '%';
+        }
+
+        function checkQuickAnswer(btn, isCorrect) {
+            const feedback = document.getElementById('quick-feedback');
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+            
+            if (isCorrect) {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Correct! 'Count on me' berarti kamu dapat mengandalkan / mempercayai saya.`;
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Not quite right. Coba lagi! Lingkup kata ini adalah tentang kepercayaan sahabat.`;
+            }
+        }
+
+        // --- PRACTICE SECTION LOGIC ---
+        function checkMatchingTask() {
+            const m1 = document.getElementById('match-1').value;
+            const m2 = document.getElementById('match-2').value;
+            const m3 = document.getElementById('match-3').value;
+            const feedback = document.getElementById('matching-feedback');
+
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+            if (m1 === 'menuntun' && m2 === 'mengingatkan' && m3 === 'mengandalkan') {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Excellent! Semua pencocokan kata sudah benar!`;
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Masih ada pasangan kata yang kurang tepat. Periksa kembali Vocabulary Corner!`;
+            }
+        }
+
+        function checkFillBlanks() {
+            const b1 = document.getElementById('blank-1').value.trim().toLowerCase();
+            const b2 = document.getElementById('blank-2').value.trim().toLowerCase();
+            const feedback = document.getElementById('fill-feedback');
+
+            feedback.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
+
+            if (b1 === 'dark' && b2 === 'light') {
+                feedback.classList.add('bg-emerald-100', 'text-emerald-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> Great job! Keduanya benar: "...lost in the <strong>dark</strong>... be the <strong>light</strong> to guide you."`;
+            } else {
+                feedback.classList.add('bg-rose-100', 'text-rose-800');
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Jawaban belum tepat. Petunjuk: kata pertama = kegelapan, kata kedua = cahaya.`;
+            }
+        }
+
+        // --- QUIZ TIME LOGIC ---
+        function renderQuizQuestion() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-current-num').innerText = currentQuizIndex + 1;
+            document.getElementById('quiz-question').innerText = `${currentQuizIndex + 1}. ${q.q}`;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            const optionLabels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentQuizIndex] === idx;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-3.5 rounded-xl border transition-all text-xs sm:text-sm font-medium flex items-center gap-3 ${
+                    isSelected ? 'bg-purple-600 text-white border-purple-600 shadow-md' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-purple-50'
+                }`;
+                btn.onclick = () => selectQuizAnswer(idx);
+                btn.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg font-bold flex items-center justify-center shrink-0 ${
+                        isSelected ? 'bg-white text-purple-600' : 'bg-purple-100 text-purple-700'
+                    }">${optionLabels[idx]}</span>
+                    <span>${opt}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Button controls state
+            document.getElementById('quiz-prev-btn').disabled = (currentQuizIndex === 0);
+            if (currentQuizIndex === quizQuestions.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = `Submit Quiz <i class="fa-solid fa-check-double ml-1"></i>`;
+            } else {
+                document.getElementById('quiz-next-btn').innerHTML = `Next <i class="fa-solid fa-chevron-right ml-1"></i>`;
+            }
+        }
+
+        function selectQuizAnswer(optIndex) {
+            userAnswers[currentQuizIndex] = optIndex;
+            renderQuizQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuizIndex > 0) {
+                currentQuizIndex--;
+                renderQuizQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                renderQuizQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            // Check if all answered
+            const unanswered = userAnswers.includes(null);
+            if (unanswered) {
+                if (!confirm("Masih ada soal yang belum dijawab. Yakin ingin mengumpulkan?")) {
+                    return;
+                }
+            }
+
+            // Calculate score
+            let correctCount = 0;
+            quizQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const total = quizQuestions.length;
+            const wrongCount = total - correctCount;
+            const scorePercentage = Math.round((correctCount / total) * 100);
+
+            // Hide container, show result
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+
+            document.getElementById('quiz-score-num').innerText = scorePercentage;
+            document.getElementById('quiz-correct-cnt').innerText = correctCount;
+            document.getElementById('quiz-wrong-cnt').innerText = wrongCount;
+
+            // Determine predicate
+            let predicate = "";
+            let predicateColor = "";
+            if (scorePercentage >= 90) {
+                predicate = "Excellent! Perfect Understanding!";
+            } else if (scorePercentage >= 80) {
+                predicate = "Very Good! Great job!";
+            } else if (scorePercentage >= 70) {
+                predicate = "Good! Keep up the effort!";
+            } else {
+                predicate = "Keep Practicing! Don't give up!";
+            }
+
+            document.getElementById('quiz-predicate').innerText = predicate;
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            renderQuizQuestion();
+        }
+
+        // --- REFLECTION LOGIC ---
+        function submitReflection(e) {
+            e.preventDefault();
+            const q1 = document.getElementById('ref-q1').value;
+            const q2 = document.getElementById('ref-q2').value;
+            const q3 = document.getElementById('ref-q3').value;
+
+            const summary = document.getElementById('reflection-summary');
+            summary.innerHTML = `
+                <p><strong>Learning outcome:</strong> ${q1}</p>
+                <p><strong>Favorite Vocab:</strong> ${q2}</p>
+                <p><strong>Song Message:</strong> ${q3}</p>
+            `;
+
+            document.getElementById('reflection-saved').classList.remove('hidden');
+            document.getElementById('reflection-form').reset();
+        }
+
+        // --- INITIALIZATION ON WINDOW LOAD ---
+        window.onload = function() {
+            renderVocabularyGrid();
+            renderQuizQuestion();
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>
